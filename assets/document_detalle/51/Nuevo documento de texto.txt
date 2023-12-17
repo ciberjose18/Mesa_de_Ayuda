@@ -1,0 +1,6 @@
+Dime 30 tareas necesarias para la realizacion de un proyecto de creacion de uba empresa de Big Data, con base en los siguientes objetivos:
+"Establecer una empresa especializada en big data que ofrezca soluciones de análisis y visualización de datos para mejorar la toma de decisiones en negocios de la región.
+
+-Realizar un análisis detallado sobre la creación e implementación de una empresa de big data y su impacto de acuerdo al contexto y normatividad de la región, así como identificar riesgos potenciales y medidas de mitigación.
+-Realizar estudios de mercado y análisis financiero para determinar la demanda y viabilidad del servicio de big data en el sector empresarial colombiano.
+-Diseñar la infraestructura tecnológica y una simulación funcional que permita la recopilación, análisis y visualización de datos."
