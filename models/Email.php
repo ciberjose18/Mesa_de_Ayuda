@@ -1,18 +1,19 @@
 <?php
 /* librerias necesarias para que el proyecto pueda enviar emails */
-require('class.phpmailer.php');
-include("class.smtp.php");
-/* llamada de las clases necesarias que se usaran en el envio del mail */
+require "../include/vendor/autoload.php";
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+/* llamada de las clases necesaria s que se usaran en el envio del mail */
 require_once("../config/conexion.php");
 require_once("../models/Ticket.php");
+
 
 class Email extends PHPMailer
 {
 
     //variable que contiene el correo del destinatario
     protected $gCorreo = 'josetriana2018@outlook.es';
-    protected $gContrasena = '123456';
-    protected $tu_nombre = 'Hola';
+    protected $gContrasena = 'joseelkoko1562';
     //variable que contiene la contraseña del destinatario
 
 
@@ -34,13 +35,13 @@ class Email extends PHPMailer
         $this->Port = 587; //Aqui el puerto
         $this->SMTPSecure = 'tls';
         $this->SMTPAuth = true;
+
         $this->Username = $this->gCorreo;
         $this->Password = $this->gContrasena;
-        $this->From = $this->gCorreo;
-        $this->FromName = $this->tu_nombre = "Ticket Abierto " . $id;
+        $this->setFrom($this->gCorreo, "Ticket Abierto ".$id);
+
         $this->CharSet = 'UTF8';
         $this->addAddress($correo);
-        $this->WordWrap = 50;
         $this->IsHTML(true);
         $this->Subject = "Ticket Abierto";
         //Igual//
@@ -92,12 +93,11 @@ class Email extends PHPMailer
         $this->SMTPAuth = true;
         $this->Username = $this->gCorreo;
         $this->Password = $this->gContrasena;
-        $this->From = $this->gCorreo;
         $this->SMTPSecure = 'tls';
-        $this->FromName = $this->tu_nombre = "Ticket Cerrado " . $id;
+        $this->setFrom($this->gCorreo, "Ticket Cerrado ".$id);
+        
         $this->CharSet = 'UTF8';
         $this->addAddress($correo);
-        $this->WordWrap = 50;
         $this->IsHTML(true);
         $this->Subject = "Ticket Abierto";
         //Igual//
@@ -147,14 +147,12 @@ class Email extends PHPMailer
         $this->Host = 'smtp.office365.com'; //Aqui el server
         $this->Port = 587; //Aqui el puerto
         $this->SMTPAuth = true;
+        $this->SMTPSecure = 'tls';
         $this->Username = $this->gCorreo;
         $this->Password = $this->gContrasena;
-        $this->From = $this->gCorreo;
-        $this->SMTPSecure = 'tls';
-        $this->FromName = $this->tu_nombre = "Ticket Asignado " . $id;
+        $this->setFrom($this->gCorreo, "Ticket Asignado ".$id);
         $this->CharSet = 'UTF8';
         $this->addAddress($correo);
-        $this->WordWrap = 50;
         $this->IsHTML(true);
         $this->Subject = "Ticket Abierto";
         //Igual//
