@@ -22,7 +22,6 @@ switch ($_GET["op"]) {
                 $output["not_id"] = $row["not_id"];
                 $output["usu_id"] = $row["usu_id"];
                 $output["not_mensaje"] = $row["not_mensaje"] . ' ' . $row["tick_id"];
-            
                 $output["tick_id"] = $row["tick_id"];
             }
             echo json_encode($output);

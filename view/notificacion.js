@@ -1,6 +1,10 @@
+
+
 $(document).ready(function () {
   mostrar_notificacion();
 });
+
+
 
 function mostrar_notificacion() {
 
@@ -14,15 +18,17 @@ function mostrar_notificacion() {
         contentType: false,
         processData: false,
         success: function(data){
-            console.log(data);
+            
             if (data==''){
             }
             else{
                 data = JSON.parse(data);
+                console.log(data);
+                console.log(data.$tick_id);
                 $.notify({
                     icon: 'glyphicon glyphicon-star',
                     message: data.not_mensaje,
-                    url: "http://localhost/Mesa_de_Ayuda/view/DetalleTicket/?ID="+data.tick_id
+                    url: "http://localhost/Mesa_de_Ayuda/view/DetalleTicket/?ID="+data.$tick_id
                 });
 
                 $.post("../../controller/notificacion.php?op=actualizar", {not_id : data.not_id}, function (data) {

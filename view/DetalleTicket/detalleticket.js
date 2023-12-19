@@ -12,11 +12,17 @@ $(document).ready(function () {
   const decoded_id = decodeURIComponent(tick_id);
   const id = decoded_id.replace(/\s/g, "+");
 
-  listardetalle(id);
+
+  mostraryvalidar(id);
+
+  
 
   // #region mostrar
-  $.ajax({url: "../../controller/ticket.php?op=mostrar", // Asegúrate de poner la ruta correcta a ticket.php 
-  type: "POST",
+  
+  
+  $.ajax({
+    url: "../../controller/ticket.php?op=mostrar", // Asegúrate de poner la ruta correcta a ticket.php
+    type: "POST",
     data: { tick_id: id }, // Reemplaza con el ID del ticket correspondiente
     success: function (response) {
       var data = JSON.parse(response);
@@ -190,7 +196,7 @@ $(document).on("click", "#btnenviar", function () {
       processData: false,
       success: function (data) {
         console.log(data);
-        listardetalle(tick_id);
+        mostraryvalidar(id);
         /* TODO: Limpiar inputfile */
         $("#fileElem").val("");
         $("#descrip_duda").summernote("reset");
@@ -242,7 +248,7 @@ $(document).on("click", "#btncerrarticket", function () {
             //Haz algo con los datos recibidos, si es necesario
           }
         );
-        listardetalle(tick_id);
+        mostraryvalidar(id);
 
         swal({
           title: "Mesa de Ayuda!",
@@ -275,23 +281,17 @@ $(document).on("click", "#btnchatgpt", function () {
   );
 });
 // #endregion
+// #region listardetalle
+function mostraryvalidar(id) {
+    
 
-
-function listardetalle(id) {
-    // #region listardetalle
-    $.post(
-      "../../controller/ticket.php?op=listardetalle",
-      { tick_id: id },
-      function (data) {
+    $.post("../../controller/ticket.php?op=listardetalle", { tick_id: id }, function (data) {
         $("#lbldetalle").html(data);
       }
     );
   
-    $.post("../../controller/ticket.php?op=mostrar", { tick_id: id }, function (
-      data
-    ) {
+    $.post("../../controller/ticket.php?op=mostrar", { tick_id: id }, function (data) {
       data = JSON.parse(data);
-  
       $("#lblestado").html(data.tick_estado);
       $("#lblnomusuario").html(data.user_nom + " " + data.user_ape);
       $("#lblfechcrea").html(data.fecha_crea);
@@ -301,7 +301,6 @@ function listardetalle(id) {
       $("#cat_nom").val(data.cat_nom);
       $("#subc_nom").val(data.subc_nom);
       $("#tick_titulo").val(data.tick_titulo);
-  
       $("#tick_descripusu").summernote("code", data.tick_descrip);
       $("#prio_nom").val(data.prio_nom);
   

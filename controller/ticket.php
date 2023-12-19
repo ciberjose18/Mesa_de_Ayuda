@@ -291,9 +291,7 @@ switch ($_GET["op"]) {
                 #region mostrar
 
                 $iv_dec = substr(base64_decode($_POST["tick_id"]), 0, openssl_cipher_iv_length($cipher));
-                /* Obtener el texto cifrado sin el IV */
                 $cifradoSinIV = substr(base64_decode($_POST["tick_id"]), openssl_cipher_iv_length($cipher));
-                /* TODO: Descifrado */
                 $decifrado = openssl_decrypt($cifradoSinIV, $cipher, $key, OPENSSL_RAW_DATA, $iv_dec);
 
                 $datos = $ticket->listar_ticket_x_id($decifrado);
