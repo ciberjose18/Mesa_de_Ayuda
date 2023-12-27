@@ -23,11 +23,6 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
     <link href="assets/img/favicon.png" rel="icon" type="image/png">
     <link href="assets/img/favicon.ico" rel="shortcut icon">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
     <link rel="stylesheet" href="assets/css/separate/pages/login.min.css">
     <link rel="stylesheet" href="assets/css/lib/font-awesome/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/lib/bootstrap/bootstrap.min.css">
@@ -86,7 +81,7 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
                     </div>
                     <div class="form-group">
                         <div class="float-right reset">
-                            <a href="reset-password.html">Cambiar Contraseña</a>
+                            <a href="view\ResetPassword\">Recuperar Contraseña</a>
                         </div>
                         <div class="float-left reset">
                             <a href="#" id="btnsoporte">Acceso Soporte</a>

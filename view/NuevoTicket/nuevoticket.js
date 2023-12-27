@@ -106,9 +106,18 @@ function guardaryeditar(e) {
 
               $.post("../../controller/whatsapp.php?op=w_ticket_abierto", {tick_id : data[0].tick_id}, function (data) {
 
+
               });
 
               $.post("../../controller/email.php?op=ticket_abierto", {tick_id : data[0].tick_id}, function (data) {
+                // Procesar y mostrar la respuesta del servidor
+                console.log("Respuesta del servidor:", data);
+                var serverResponse = JSON.parse(data);
+                if (serverResponse.status === 'error') {
+                    console.error('Error al enviar el correo:', serverResponse.message);
+                } else {
+                    console.log('Correo enviado correctamente:', serverResponse.message);
+                }
 
               });
 

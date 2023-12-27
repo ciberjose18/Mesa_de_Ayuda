@@ -6,6 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 /* llamada de las clases necesaria s que se usaran en el envio del mail */
 require_once("../config/conexion.php");
 require_once("../models/Ticket.php");
+require_once("../models/Usuario.php");
 
 
 class Email extends PHPMailer
@@ -16,7 +17,7 @@ class Email extends PHPMailer
     protected $gContrasena = 'joseelkoko1562';
     //variable que contiene la contraseña del destinatario
 
-
+#region ticket_abierto
     public function ticket_abierto($tick_id)
     {
         $ticket = new Tickets();
@@ -26,7 +27,7 @@ class Email extends PHPMailer
             $usu = $row["user_nom"];
             $titulo = $row["tick_titulo"];
             $categoria = $row["cat_nom"];
-            $correo = $row["usu_correo"];
+            $correo = $row["user_email"];
         }
 
         //IGual//
@@ -70,10 +71,17 @@ class Email extends PHPMailer
             $response['message'] = 'Excepción al enviar el correo: ' . $e->getMessage();
         }
         echo json_encode($response);
-
         return $this->Send();
-    }
 
+        if ($enviado) {
+            return json_encode(['status' => 'success', 'message' => 'Correo enviado correctamente']);
+        } else {
+            return json_encode(['status' => 'error', 'message' => 'Error al enviar el correo: ' . $this->ErrorInfo]);
+        }
+    }
+    #endregion 
+
+    #region ticket_cerrado
     public function ticket_cerrado($tick_id)
     {
         $ticket = new Tickets();
@@ -83,7 +91,7 @@ class Email extends PHPMailer
             $usu = $row["user_nom"];
             $titulo = $row["tick_titulo"];
             $categoria = $row["cat_nom"];
-            $correo = $row["usu_correo"];
+            $correo = $row["user_email"];
         }
 
         //IGual//
@@ -129,7 +137,9 @@ class Email extends PHPMailer
 
         return $this->Send();
     }
+    #endregion 
 
+    #region ticket_asignado
     public function ticket_asignado($tick_id)
     {
         $ticket = new Tickets();
@@ -139,7 +149,7 @@ class Email extends PHPMailer
             $usu = $row["user_nom"];
             $titulo = $row["tick_titulo"];
             $categoria = $row["cat_nom"];
-            $correo = $row["usu_correo"];
+            $correo = $row["user_email"];
         }
 
         //IGual//
@@ -184,4 +194,53 @@ class Email extends PHPMailer
 
         return $this->Send();
     }
+    #endregion 
+
+    #region recuperar_clave
+    public function recuperar_clave($user_email)
+    {
+        $usuario = new Usuario();
+        $datos = $usuario->get_usuario_x_correo($user_email);
+
+        foreach ($datos as $row) {
+            $usu_id = $row["usu_id"];
+            $usu_ape = $row["user_ape"];
+            $usu_nom = $row["user_nom"];
+            $correo = $row["user_email"];
+            $usu_pass = $row["user_pass"];
+        }
+
+        //IGual//
+        $this->IsSMTP();
+        $this->Host = 'smtp.office365.com'; //Aqui el server
+        $this->Port = 587; //Aqui el puerto
+        $this->SMTPSecure = 'tls';
+        $this->SMTPAuth = true;
+
+        $this->Username = $this->gCorreo;
+        $this->Password = $this->gContrasena;
+        $this->setFrom($this->gCorreo, "Recuperar Contraseña");
+
+        $this->CharSet = 'UTF8';
+        $this->addAddress($correo);
+        $this->IsHTML(true);
+        $this->Subject = "Recuperar Contraseña";
+        //Igual//
+        $cuerpo = file_get_contents('../assets/RecuperarClave.html'); /* Ruta del template en formato HTML */
+        /* parametros del template a remplazar */
+        $cuerpo = str_replace("xusunom", $usu_nom, $cuerpo);
+        $cuerpo = str_replace("xusuape", $usu_ape, $cuerpo);
+        $cuerpo = str_replace("xnuevopass", $usu_pass, $cuerpo);
+
+        $this->Body = $cuerpo;
+        $this->AltBody = strip_tags("Recuperar Contraseña");
+
+        try {
+            $enviado = $this->Send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    #endregion 
 }

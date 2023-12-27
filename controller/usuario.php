@@ -142,5 +142,16 @@ switch ($_GET["op"]) {
         $usuario->update_pass($_POST["usu_id"], $pass_cifra);
         break;
         #endregion 
+        #region correo
+    case "correo":
+        $datos = $usuario->get_usuario_x_correo($_POST["user_email"]);
+        if (is_array($datos) == true and count($datos) > 0) {
+
+            echo "Existe";
+        } else {
+            echo "Error";
+        }
+        break;
+        #endregion 
 
 }

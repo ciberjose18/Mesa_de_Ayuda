@@ -222,4 +222,17 @@ class Usuario extends Conectar
         return $resultado = $sql->fetchAll();
     }
     #endregion
+
+        #region get_usuario_x_correo 
+        public function get_usuario_x_correo($user_email)
+        {
+            $conectar = parent::conexion();
+            parent::set_names();
+            $sql = "SELECT * FROM mt_usuario WHERE user_email=?";
+            $sql = $conectar->prepare($sql);
+            $sql->bindValue(1, $user_email);
+            $sql->execute();
+            return $resultado = $sql->fetchAll();
+        }
+        #endregion
 }

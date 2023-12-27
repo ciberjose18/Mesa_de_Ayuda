@@ -33,13 +33,11 @@ $(document).ready(function(){
                 ykeys: ['Total'],
                 labels: ['Value'],
                 barColors: function (row, series, type) {
-                    if(row.label == "Reparación") return "#AD1D28";
-                    else if(row.label == "Revisión y Diagnóstico") return "#DEBB27";
-                    else if(row.label == "Scaner") return "#4993B8"; 
-                    else if(row.label == "Desplazamiento") return "#B66C47";
-                    else if(row.label == "Garantía") return "#009688";
-                    else if(row.label == "Otro") return "#7c4dff";
-
+                    if(row.label == "Hardware") return "#AD1D28";
+                    else if(row.label == "Software") return "#DEBB27";
+                    else if(row.label == "Incidencia") return "#4993B8"; 
+                    else if(row.label == "Petición de Servicio") return "#B66C47";
+                    else if(row.label == "test2") return "#009688";
 
 
                 }
