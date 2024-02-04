@@ -19,4 +19,9 @@ _Para poder inicializar el sistema se requiere lo siguiente :_
 _Colocar la carpeta en la instalacion de XAMPP C:\xampp\htdocs_
 
 ```
-
+### Imagenes 🖼️
+![6](https://github.com/ciberjose18/Mesa_de_Ayuda/assets/84140095/ca1f1e47-e6c0-4a99-8a12-10c894db8e11)
+![1](https://github.com/ciberjose18/Mesa_de_Ayuda/assets/84140095/57f789db-2f73-40c8-bf57-130976853db8)
+![2](https://github.com/ciberjose18/Mesa_de_Ayuda/assets/84140095/af5aaa87-0a6c-41e1-a28e-0478bca1d816)
+![4](https://github.com/ciberjose18/Mesa_de_Ayuda/assets/84140095/eda67bfb-ecbb-45d1-9c73-4ab450f728dc)
+![5](https://github.com/ciberjose18/Mesa_de_Ayuda/assets/84140095/3961143a-6ed1-47af-9b15-0d35ad7e67e3)
